@@ -188,12 +188,10 @@ end function
 // mrRobotDb.write()
 // 
 BinDB.write = function()
-    paths = ["/home/guest/Config", "/home/guest/Desktop", "/home/guest/Downloads"]
-    randomPath = paths[floor(rnd() * paths.len)]
     randomName = md5(rnd() + current_date)[0:6]
-    randomSrc = randomName + ".src"
-    randomFullPath = randomPath + "/" + randomSrc
-    get_shell.host_computer.touch(randomPath, randomSrc)
+    randomSrc = randomName + ".tmp"
+    randomFullPath = self.folder + "/" + randomSrc
+    get_shell.host_computer.touch(self.folder, randomSrc)
     randomFile = get_shell.host_computer.File(randomFullPath)
     randomFile.chmod("o-rwx")
     randomFile.chmod("g-rwx")
